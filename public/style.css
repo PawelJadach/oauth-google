@@ -60,6 +60,15 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  background-color: #0042c5;
+}
+
+button a {
+  color: white;
+  text-decoration: none;
+}
+
 .error {
   background: #fff;
   color: #000;
@@ -150,6 +159,14 @@ button {
 .loginBtn--google:focus {
   background: #E74B37;
   box-shadow: 0 0 10px 5px rgba(0,0,0,0.1);
+}
+
+.avatar {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 10px rgba(0,0,0,0.1);
+  object-fit: cover;
 }
 
 @-webkit-keyframes fadeIn {

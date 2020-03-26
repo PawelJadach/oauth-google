@@ -2,8 +2,18 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const hbs = require('express-handlebars');
+const passport = require('passport');
+const session = require('express-session');
+const passportSetup = require('./config/passport');
+const authRoutes = require('./routes/auth.routes');
+const userRoutes = require('./routes/user.routes');
+
 
 const app = express();
+
+app.use(session({ secret: 'anything' }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.engine('hbs', hbs({ extname: 'hbs', layoutsDir: './layouts', defaultLayout: 'main' }));
 app.set('view engine', '.hbs');
@@ -17,13 +27,8 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.get('/user/logged', (req, res) => {
-  res.render('logged');
-});
-
-app.get('/user/no-permission', (req, res) => {
-  res.render('noPermission');
-});
+app.use('/auth', authRoutes);
+app.use('/user', userRoutes);
 
 app.use('/', (req, res) => {
   res.status(404).render('notFound');
